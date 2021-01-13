@@ -5,7 +5,10 @@ const mongoose  = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 
-dotenv.config(); //to load up the file
+
+const User = require('./models/user');
+
+dotenv.config(); //to load up .env the file
 
 
 const app = express();
@@ -32,6 +35,21 @@ app.get('/', (req,res) => {
     res.json('hello from server')
 });
 //POST - send data from frontend to backend
+app.post("/",(req, res) => {
+    let user = new User();
+    user.name = req.body.name;
+    user.password = req.body.password;
+    user.email = req.body.email;
+
+    user.save(err => {
+        if(err){
+            console.log(err);
+        }else {
+            res.json('successfully saved');
+        }
+    })
+});
+
 
 app.listen(3000, err => {
     if(err) {
