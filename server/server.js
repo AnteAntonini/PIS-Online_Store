@@ -10,6 +10,15 @@ dotenv.config(); //to load up the file
 
 const app = express();
 
+mongoose.connect(process.env.DATABASE, { 
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    })
+    .then(() => console.log('DB Connected!'))
+    .catch(err => {
+        console.log(err);
+})
+
 
 
 // MIDDLEWARES  
