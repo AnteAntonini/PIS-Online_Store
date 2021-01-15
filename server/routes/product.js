@@ -1,9 +1,12 @@
 const router = require('express').Router();  //we want to group our API
 const Product = require('../models/product');
 
+//MIDDLEWARES
+const upload = require('../middlewares/upload-photo');
+
 
 //POST request - create a new product
-router.post('/products', async (req, res) => {
+router.post('/products', upload.single("photo"),  async (req, res) => {     //upload.single -> we just want to upload a single photo 
     try {
         let product = new Product();
         product.title = req.body.title;
