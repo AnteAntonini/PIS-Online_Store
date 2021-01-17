@@ -54,9 +54,9 @@ router.get('/products', async (req, res) => {
 router.get('/products/:id', async (req, res) => {
     try {
         let product = await Product.findOne({_id: req.params.id}) 
-            .populate('owner category')
+            /* .populate('owner category')
             .populate('reviews', 'rating')
-            .exec();
+            .exec(); */
             
         res.json({
             success: true,
@@ -86,7 +86,7 @@ router.put('/products/:id', async (req, res) => {
                 /* product.photo = req.file.location */
             }
         },
-        {upsert: true}); 
+        {upsert: true}); //if id doesn't exists in DB, then create this new object (new product)
 
         res.json({
             success: true,
