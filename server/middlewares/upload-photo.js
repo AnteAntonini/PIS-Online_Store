@@ -7,18 +7,17 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 
 aws.config.update({         
-    secretAccessKey: process.env.aws_secret_access_key,
-    accessKeyId: process.env.aws_access_key_id,
-    aws_session_token: process.env.aws_session_token
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID
 });
 
-const s3 = new aws.S3();
+const s3 = new aws.S3({apiVersion: '2006-03-01'});
 
 const upload = multer({
     storage: multerS3({
         s3: s3,
         bucket: 'pis-online-store',
-        acl: 'public read',
+        acl: 'public-read',
         metadata: (req, file, cb) => {
             cb(null, {fieldName: file.fieldname});      //value will be name of the file
         },
@@ -27,5 +26,4 @@ const upload = multer({
         }
     })
 });
-
 module.exports = upload;

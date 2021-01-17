@@ -11,7 +11,7 @@ router.post('/products', upload.single("photo"),  async (req, res) => {     //up
         let product = new Product();
         product.title = req.body.title;
         product.description = req.body.description;
-        product.photo = req.body.photo;
+        product.photo = req.file.location;                  //sprema lokaciju file iz AWS bucker S3  u DB pod photo, u photo ce ic URL od lokacije
         product.price = req.body.price;
         product.stockQuantity = req.body.stockQuantity;
 
