@@ -1,12 +1,16 @@
 const router = require('express').Router();
 const Owner = require('../models/owner');
 
+//MIDDLEWARES
+const upload = require('../middlewares/upload-photo');
+
 //POST request
-router.post('/owners', async(req,res)=>{
+router.post('/owners',  async(req,res)=>{  // middleware -> upload.single("photo"),
     try {
         let owner = new Owner();
         owner.name = req.body.name;
         owner.about = req.body.about;
+        /* owner.photo = req.file.location; */
 
         await owner.save();
 
