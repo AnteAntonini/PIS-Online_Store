@@ -1,12 +1,12 @@
 <template>
   <v-app dark>
     <Navbar/>
-    <nuxt app/>
-    <v-footer
-      app
+    <nuxt/>
+  <!--   <v-footer
+      class="mt-15"
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+    </v-footer> -->
   </v-app>
 </template>
 
