@@ -15,7 +15,7 @@ router.post('/auth/signup', async (req, res) => {
             newUser.email = req.body.email;
             newUser.password = req.body.password;
 
-            await newUser.save();   
+            await newUser.save();   //save new user in DB
             let token = jwt.sign(newUser.toJSON(), process.env.SECRET, {      //bcrypt the user object into JWT
                 expiresIn: 604800 // 1 week
             });

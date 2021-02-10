@@ -6,7 +6,7 @@ const UserSchema = new Schema({
     name: String,
     email: {type: String, unique: true, required: true},
     password: {type: String, required: true},
-    address: {type: Schema.Types.ObjectId, ref: 'Address'} // 1:1 relation with Address -> povezujemo sa Address Schema (relationship), napravit cemo odvojeno da nebi pretrpali ovu UserSchemu
+    address: {type: Schema.Types.ObjectId, ref: 'Address'} // 1:1 relation with Address 
 });
 
 UserSchema.pre('save', function(next) {         //before saving user object in DB 
@@ -17,7 +17,7 @@ UserSchema.pre('save', function(next) {         //before saving user object in D
                 return next(err);
             }
 
-            bcrypt.hash(user.password, salt, null, function(err,has){
+            bcrypt.hash(user.password, salt, null, function(err,hash){
                 if(err) {
                     return next(err);
                 }
