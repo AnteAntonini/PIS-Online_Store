@@ -11,13 +11,7 @@
       ></v-text-field>
       <v-spacer></v-spacer>
 
-      <div class="d-flex flex-column mt-4">
-        <span style="font-size: 12px">Hello, Sign in</span>
-        <v-btn small class="mx-2" text style="font-size: 10px">
-          Accounts
-          <v-icon small>mdi-arrow-down</v-icon>
-        </v-btn>
-      </div>
+        <v-btn text style="font-size: 12px" nuxt to="/signup">Sign in</v-btn>
 
       <v-btn class="mx-6" text> Orders </v-btn>
 

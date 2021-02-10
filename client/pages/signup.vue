@@ -5,11 +5,11 @@
       <v-text-field v-model="name" label="Name" required></v-text-field>
 
       <v-text-field v-model="email" label="E-mail" required></v-text-field>
-      <v-text-field v-model="password" label="Password" required :counter="6"
-      :rules="passwordRules"></v-text-field>
+      <v-text-field v-model="password" label="Password" 
+      :rules="passwordRules" :type="show1 ? 'text' : 'password'" hint="At least 6 characters"></v-text-field>
       <v-btn class="my-4" color="green">Create account</v-btn>
       <v-divider class="my-3"></v-divider>
-      <span>Already have account? <a href="#" class="sign-in-btn">Sign in</a></span>
+      <span>Already have account? <v-btn text class="sign-in-btn blue--text">Sign in</v-btn></span>
     </v-form>
   </div>
 </template>
@@ -23,9 +23,10 @@
           email: '',
           valid: '',
           password: '',
+          show1: false,
           passwordRules: [
             v => !!v || 'Password is required',
-            v => (v && v.length <= 10) || 'Password must be at lest  6 characters',
+            v => (v && v.length >= 6) || 'Password must be at lest  6 characters',
           ],
         }
       }
