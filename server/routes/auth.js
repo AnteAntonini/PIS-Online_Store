@@ -89,7 +89,7 @@ router.post('/auth/login', async (req, res) => {
             })
         } else {            // if user does exists
             if (foundUser.comparePassword(req.body.password)) {     //check the password 
-                let token = jwt.sign(foundUser.toJSON(), process.env.SECRET, {  // if password is correct, wrap the user's object in a token 
+                let token = jwt.sign(foundUser.toJSON(), process.env.SECRET, {  // if password is correct, wrap the foundUser's object in a token 
                     expiresIn: 604800 // 1 week                                
                 })
 

@@ -29,7 +29,13 @@ UserSchema.pre('save', function(next) {         //before saving user object in D
     } else {
         return next();
     }
-})
+});
+
+//Attach comparePassword method to UserSchema
+UserSchema.methods.comparePassword = function(password, next) { //compare send password with password in DB
+    let user = this;
+    return bcrypt.compareSync(password, user.password);
+};
 
 
 module.exports = mongoose.model('User', UserSchema);
