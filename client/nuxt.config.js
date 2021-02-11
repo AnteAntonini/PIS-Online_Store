@@ -90,9 +90,10 @@ export default {
           login: {
             propertyName: 'token'
           },
-          user: { method: 'get', propertyName: 'user'},
-          logout: false
+          user: {propertyName: false},
+          logout: true
         },
+        tokenType: '',
         globalToken: true
       }
     }
