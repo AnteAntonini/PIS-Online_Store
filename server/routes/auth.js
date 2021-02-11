@@ -23,7 +23,7 @@ router.post('/auth/signup', async (req, res) => {
             res.json({
                 success: true,
                 token: token,       //response with token
-                message: "Successfully created a new User"
+                message: "Successfully created a new User",
             })
         } catch (err) {
             res.status(500).json({
@@ -37,8 +37,8 @@ router.post('/auth/signup', async (req, res) => {
 /* Profile Route */
 router.get('/auth/user', verifyToken, async (req, res) => {
     try {                                                          
-        let foundUser = await User.findOne({ _id: req.decoded._id })    //we are passing the _id which is req.decoded._id to find specified id in the DB then return users object
-        .populate('address'); 
+        let foundUser = await User.findOne({ _id: req.decoded._id })    //find specified id in the DB then return users object
+        /* .populate('address');  */   
         if (foundUser) {            // if user does exists
             res.json({
                 success: true,

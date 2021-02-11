@@ -5,7 +5,7 @@
       <div class="d-flex flex-no-wrap justify-start">
         <v-avatar tile height="170" width="120">
           <v-img
-            src="https://shop.skolskaknjiga.hr/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/1/7/172335.jpg"
+            src="img/harry-potter.jpg"
           ></v-img><!-- :src="product.photo" -->
         </v-avatar>
         <div>
@@ -27,7 +27,7 @@ export default {
   async asyncData({$axios}) {
     try {
       let response = await $axios.$get('/api/products')
-      console.log(response)
+      
       return {
         products: response.products
       }
