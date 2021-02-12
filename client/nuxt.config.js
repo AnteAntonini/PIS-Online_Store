@@ -88,9 +88,13 @@ export default {
       local: {
         endpoints: {
           login: {
+            url: 'http://localhost:3000/api/auth/login',
             propertyName: 'token'
           },
-          user: {propertyName: false},
+          user: {
+            url: 'http://localhost:3000/api/auth/user',
+            propertyName: ''
+          },
           logout: true
         },
         tokenType: '',

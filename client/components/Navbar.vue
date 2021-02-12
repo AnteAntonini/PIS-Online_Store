@@ -11,8 +11,6 @@
       ></v-text-field>
       <v-spacer></v-spacer>
 
-        <v-btn text style="font-size: 12px" nuxt to="/signup">Sign in</v-btn>
-
       <v-btn class="mx-6" text> Orders </v-btn>
 
       <v-btn text class="mx-6">
@@ -20,9 +18,22 @@
         <v-icon>mdi-cart-variant</v-icon>
         0
       </v-btn>
+
+      <div v-if="$auth.$state.loggedIn">
+        <v-btn text style="font-size: 10px" class="text-capitalize btn-font">
+          <span>Hello, <br>{{ $auth.$state.user.user.name}}</span>
+        </v-btn>
+        <v-btn text>
+          Log Out
+        </v-btn>
+      </div>
+      <v-btn text style="font-size: 12px" nuxt to="/login" v-else>Sign in</v-btn>
     </v-app-bar>
   </div>
 </template>
 
 <style scoped>
+.btn-font{
+  font-size: 17px !important;
+}
 </style>

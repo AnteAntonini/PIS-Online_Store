@@ -9,7 +9,7 @@
       :rules="passwordRules" :type="show1 ? 'text' : 'password'" hint="At least 6 characters"></v-text-field>
       <v-btn class="my-4" color="green" @click="onSignUp">Create account</v-btn>
       <v-divider class="my-3"></v-divider>
-      <span>Already have account? <v-btn text class="sign-in-btn blue--text">Sign in</v-btn></span>
+      <span>Already have account? <v-btn nuxt to="/login" text class="sign-in-btn blue--text">Sign in</v-btn></span>
     </v-form>
 
   </div>
@@ -17,6 +17,8 @@
 
 <script>
     export default {
+      middleware: 'auth',
+      auth: 'guest',          //only not loggedIn: false can access the page  
       layout: 'none',
       data() {
         return {
@@ -39,7 +41,7 @@
                   password: this.password
                 }
 
-                let response = await this.$axios.$post('/api/auth/signup', data)
+                let response = await this.$axios.$post('http://localhost:3000/api/auth/signup', data)
                 console.log(response)
 
                 if(response.success) {  //if response is success we want to trigger auth library
@@ -66,7 +68,7 @@
 }
 .container {
   width: 50%; 
-  border: 1px solid white
+  border: 1px solid white;
 }
 .sign-in-btn {
   text-decoration: none;
