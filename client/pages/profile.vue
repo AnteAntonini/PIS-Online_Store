@@ -1,12 +1,30 @@
 <template>
   <div class="container mt-15">
     <h1 class="mt-10" style="text-align: center">Profile</h1>
-
     <v-form class="mx-auto" lazy-validation>
       <v-text-field v-model="name" :label="$auth.$state.user.user.name"></v-text-field>
       <v-text-field v-model="email" :label="$auth.$state.user.user.email"></v-text-field>
-      <v-text-field v-model="password" label="Password"></v-text-field>
-      <v-btn class="my-4" color="green" @click="onUpdateProfile">Update Profile</v-btn>
+      <v-text-field v-model="password" label="Password" :type="show1 ? 'text' : 'password'"></v-text-field>
+      <v-btn class="my-4" color="green" @click="onUpdateProfile; snackbar = true">Update Profile</v-btn>
+      <div class="text-center">
+        <v-snackbar
+        v-model="snackbar"
+        :multi-line="multiLine"
+        >
+        Profile Updated
+
+        <template v-slot:action="{ attrs }">
+            <v-btn
+            color="red"
+            text
+            v-bind="attrs"
+            @click="snackbar = false"
+            >
+            Close
+            </v-btn>
+        </template>
+        </v-snackbar>
+      </div>
     </v-form>
 
   </div>
@@ -16,9 +34,12 @@
 export default {
     data() {
         return {
+            multiLine: true,
+            snackbar: false,    
             name: '',
             email: '',
-            password: ''
+            password: '',
+            show1: false,
         }
     },
     methods: {
@@ -36,21 +57,18 @@ export default {
                     this.email = ''
                     this.password = ''
 
-                    await this.$auth.$fetchUser() //refetch API back
+                    await this.$auth.fetchUser() //refetch API back
                 }
             } catch (err) {
                 console.log(err);   
             }
         },
-        async onLogout() {
-            await this.$auth.logout()   //clear token from cookies and local storage, then redirect to homepage
-        }
     }
 };
 </script>
 
 <style>
 .container {
-  width: 50%; 
+  width: 50%;
 }
 </style>

@@ -20,10 +20,10 @@
       </v-btn>
 
       <div v-if="$auth.$state.loggedIn">
-        <v-btn text style="font-size: 10px" class="text-capitalize btn-font">
+        <v-btn text style="font-size: 10px" class="text-capitalize btn-font" nuxt to="/profile">
           <span>Hello, <br>{{ $auth.$state.user.user.name}}</span>
         </v-btn>
-        <v-btn text>
+        <v-btn text @click="onLogout">
           Log Out
         </v-btn>
       </div>
@@ -31,6 +31,16 @@
     </v-app-bar>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    async onLogout() {
+    await this.$auth.logout()   // clearing all the tokens in a local storage and cookies,redirect user to home page
+    }
+  }
+}
+</script>
 
 <style scoped>
 .btn-font{
