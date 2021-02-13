@@ -17,17 +17,20 @@
                <span class="ml-8 red--text">{{product.price}}$</span>
             </div>
             <h3 class="mt-3 green--text">In Stock</h3>
-            <v-btn class="btn-width mt-6">Add to Cart</v-btn>
-            <v-btn class="btn-width my-3">Buy Now</v-btn>
+            <v-btn class="btn-width mt-6" :disabled="!$auth.$state.loggedIn" @click="addProductToCart(product)">Add to Cart</v-btn>
+            <v-btn class="btn-width my-3" :disabled="!$auth.$state.loggedIn">Buy Now</v-btn>
             <v-divider class="mt-15"></v-divider>
             <div class="justify-center">
                 Buy Now: ${{totalPrice}}
+                {{!$auth.$state.loggedIn}}
             </div>
         </v-col>
     </div>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 export default {
     async asyncData({$axios, params}) {
         try {
@@ -51,6 +54,9 @@ export default {
         totalPrice() {
             return this.product.price*this.test
         }
+    },
+    methods: {
+        ...mapActions(['addProductToCart'])
     }
 }
 </script>

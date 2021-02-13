@@ -4,32 +4,35 @@
       <h1 style="display: inline-block" class="ma-5">Shopping Cart</h1>
       <p class="mt-10" style="float: right">price</p>
       <v-divider></v-divider>
-      <div class="cart-item my-3">
-        <h3 class="inline">Product Title</h3>
-        <span class="mb-3 price-right red--text">$49</span>
-        <p>by Product Owner</p>
+      <div class="cart-item my-3" v-for="product in getCart" :key="product._id">
+        <h3 class="inline">{{product.title}}</h3>
+        <span class="mb-3 price-right red--text">${{product.price}}</span>
+        <p>by {{product.owner.name}}</p>
         <div class="mb-3">
-          <label for="quantity">Quantity:</label>
-          <input
-            class="input-bg"
-            value="1"
-            type="number"
-            id="quantity"
-            name="quantity"
-            min="1"
-          />
-          | <a href="#">Delete</a>
+          <span>Quantity:</span>
+          <select class="input-bg mr-2" @click="onChangeQuantity($event, product)">
+          <option
+            v-for="i in 10" :key="i" 
+            :selected="checkQty(product.quantity, i)"
+            :value="i"
+          >
+            {{i}}
+          </option>
+
+          </select>
+         | <v-btn href="#" @click="$store.commit('removeProduct', product)" class="red--text ml-2 ">Delete</v-btn>
         </div>
+    
         <v-divider></v-divider>
       </div>
       <span style="float: right"
-        >Subtotal (2 item): <span class="red--text"> $99</span></span
+        >Subtotal ({{getCartLength}} item): <span class="red--text"> ${{getCartTotalPrice}}</span></span
       >
       
     </v-col>
     <v-col md="4" class="mt-10 ml-8" style="border-left: 1px solid white">
       <div class="ml-5">
-        <h3>Subtotal (2 item): <span class="red--text">$99</span></h3>
+        <h3>Subtotal ({{getCartLength}} item): <span class="red--text">${{getCartTotalPrice}}</span></h3>
         <v-btn class="mt-10" color="green">Proceed to checkout</v-btn>
       </div>
     </v-col>
@@ -37,8 +40,26 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-    
+  computed: {
+    ...mapGetters(['getCart', 'getCartTotalPrice', 'getCartLength'])
+  },
+  methods: {
+    onChangeQuantity(event, product) {
+       let qty = parseInt(event.target.value);       //access value of the option, and convert string to a number
+      console.log(qty)
+      this.$store.commit('changeQty', {product, qty});
+    },
+    checkQty(prodQty, qty) {       //save quantity after refresh in option
+      if (parseInt(prodQty) === parseInt(qty)) {
+        return true
+      } else {
+        return false
+      }
+    }
+  }
 }
 </script>
 

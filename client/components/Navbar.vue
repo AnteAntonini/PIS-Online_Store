@@ -13,10 +13,10 @@
 
       <v-btn class="mx-6" text> Orders </v-btn>
 
-      <v-btn text class="mx-6">
+      <v-btn text class="mx-6" nuxt to="/cart">
         Cart
         <v-icon>mdi-cart-variant</v-icon>
-        0
+        {{getCartLength}}
       </v-btn>
 
       <div v-if="$auth.$state.loggedIn">
@@ -33,11 +33,16 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   methods: {
     async onLogout() {
     await this.$auth.logout()   // clearing all the tokens in a local storage and cookies,redirect user to home page
     }
+  },
+  computed: {
+    ...mapGetters(['getCartLength'])
   }
 }
 </script>
