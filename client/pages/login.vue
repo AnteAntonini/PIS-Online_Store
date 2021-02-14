@@ -27,14 +27,13 @@ export default {
         methods: {
         async onLogin() {
             try {
-                    this.$auth.loginWith('local', {     //trigger auth library
-                        data: {                     
-                            email: this.email,
-                            password: this.password
-                        }
-                    });
-                        
-                    this.$router.push('/')     //redirect
+                this.$auth.loginWith('local', {     //trigger auth library
+                    data: {                     
+                        email: this.email,
+                        password: this.password
+                    }
+                });
+                this.$router.push('/')     //redirect
             } catch (err) {
                 console.log(err)
             }

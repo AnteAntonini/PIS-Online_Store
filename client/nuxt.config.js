@@ -102,5 +102,8 @@ export default {
         globalToken: true
       }
     }
+  },
+  redirect: {
+    logout: '/'
   }
 }
