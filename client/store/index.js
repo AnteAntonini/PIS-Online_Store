@@ -72,7 +72,8 @@ export const mutations = {
                 state.cartLength += product.quantity;
             });
         }
-
+        let indexOfProduct = state.product.indexOf(cartProduct);        //index of the product in the cart
+        state.cart.splice(indexOfProduct, 1, cartProduct);
        
     },
 

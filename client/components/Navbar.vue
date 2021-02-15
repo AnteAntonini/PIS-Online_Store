@@ -11,7 +11,7 @@
       ></v-text-field>
       <v-spacer></v-spacer>
 
-      <v-btn class="mx-6" text :disabled="!$auth.$state.loggedIn"> Orders </v-btn>
+      <v-btn class="mx-6" nuxt to="/placeorder" text :disabled="!$auth.$state.loggedIn"> Orders </v-btn>
 
       <v-btn text class="mx-6" nuxt to="/cart" :disabled="!$auth.$state.loggedIn">
         Cart
