@@ -18,7 +18,7 @@
             </div>
             <h3 class="mt-3 green--text">In Stock</h3>
             <v-btn class="btn-width mt-6" :disabled="!$auth.$state.loggedIn" @click="addProductToCart(product)">Add to Cart</v-btn>
-            <v-btn class="btn-width my-3" :disabled="!$auth.$state.loggedIn">Buy Now</v-btn>
+            <!-- <v-btn class="btn-width my-3" :disabled="!$auth.$state.loggedIn">Buy Now</v-btn> -->
             <v-divider class="mt-15"></v-divider>
             <div class="justify-center">
                 Buy Now: ${{totalPrice}}

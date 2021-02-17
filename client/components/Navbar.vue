@@ -2,16 +2,10 @@
   <div>
     <v-app-bar color="deep-purple accent-4" height="80" class="px-10">
       <v-btn plain text nuxt to="/">Online Store</v-btn>
-      <v-text-field
-        filled
-        label="Search products"
-        class="mt-6 ml-10"
-        append-icon="mdi-magnify"
-        color="white"
-      ></v-text-field>
+      
       <v-spacer></v-spacer>
-
-      <v-btn class="mx-6" nuxt to="/placeorder" text :disabled="!$auth.$state.loggedIn"> Orders </v-btn>
+      
+      <v-btn class="mx-6" nuxt to="/orders" text :disabled="!$auth.$state.loggedIn"> Orders </v-btn>
 
       <v-btn text class="mx-6" nuxt to="/cart" :disabled="!$auth.$state.loggedIn">
         Cart

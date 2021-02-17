@@ -1,9 +1,10 @@
 <template>
-    <div class="container">
-        <h1 class="ma-3">Make a payment</h1>
-        <p>The total price is: $9999</p>
-        <v-btn>Purchase</v-btn>
-    </div>
+  <div class="mt-10 container">
+    <h1 class="ma-3">Make a payment</h1>
+    <div class="card" ref="card"></div>
+    <p>The total price is: ${{getCartTotalPrice}}</p>
+    <v-btn @click="onPurchase">Purchase</v-btn>
+  </div>
 </template>
 
 <script>
@@ -20,7 +21,7 @@ export default {
   computed: {
     ...mapGetters([
       'getCart',
-      'getCartTotalPriceWithShipping', 
+      'getCartTotalPrice', 
       'getEstimatedDelivery'
     ])
   },
@@ -36,7 +37,7 @@ export default {
         let token = await this.stripe.createToken(this.card);
         let response = await this.$axios.$post('/api/payment', {
           token: token,
-          totalPrice: this.getCartTotalPriceWithShipping,
+          totalPrice: this.getCartTotalPrice,
           cart: this.getCart,
           estimatedDelivery: this.getEstimatedDelivery
         })
@@ -54,3 +55,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.container {
+  height: 230px;
+  background: rgb(201, 195, 195);
+}
+.card {
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid white;
+}
+</style>

@@ -50,7 +50,7 @@ router.post('/payment', verifyToken, (req, res) => {
             customer: source.customer
         })
     })
-    .then(async charge => {
+    .then(async charge => {             //after we charged the cusstomer
         let order = new Order();
         let cart = req.body.cart;
 
@@ -63,6 +63,7 @@ router.post('/payment', verifyToken, (req, res) => {
         });
 
         order.owner = req.decoded._id;
+        order.totalPrice = req.body.totalPrice;
         order.estimatedDelivery = req.body.estimatedDelivery;
         await order.save()
 

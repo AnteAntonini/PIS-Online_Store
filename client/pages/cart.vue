@@ -33,7 +33,7 @@
     <v-col md="4" class="mt-10 ml-8" style="border-left: 1px solid white">
       <div class="ml-5">
         <h3>Subtotal ({{getCartLength}} item): <span class="red--text">${{getCartTotalPrice}}</span></h3>
-        <v-btn class="mt-10" color="green">Proceed to checkout</v-btn>
+        <v-btn class="mt-10" nuxt to="/payment" color="green">Proceed to checkout</v-btn>
       </div>
     </v-col>
   </div>
