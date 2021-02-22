@@ -14,7 +14,7 @@
             </v-col>
             <v-col>
                 TOTAL: <br>
-                ${{(order.products[0].price * order.products[0].quantity) + (order.products[1].price * order.products[0].quantity)}}
+                ${{order.totalPrice}}
             </v-col>
             <v-col>
                 ORDER #: {{order._id}} <br>
@@ -39,25 +39,11 @@ export default {
     try {
       let response = await $axios.$get('/api/orders')
 
-      console.log(response.products)
-
       return {
         orders: response.products
       }
     } catch (err) {
       console.log(err)
-    }
-  },
-  computed: {
-    totalPrice() {
-        let sum = 0;
-        this.orders.forEach((order,index) => {
-            order.products.forEach(product => {
-                console.log(product.price* product.quantity)
-                console.log(index)
-            })
-        })
-        return [sum];
     }
   }
 }
