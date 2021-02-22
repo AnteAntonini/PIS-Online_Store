@@ -54,47 +54,10 @@ import {mapGetters} from 'vuex';
 
 export default {
   layout: "default",
-/*   async asyncData({$axios, store}) {
-    try {
-      let response = await $axios.$post('/api/shipment', {shipment: 'normal'});
-
-      store.commit('setShipping', {
-        price: response.shipment.price,
-        estimatedDelivery: response.shipment.estimated
-      })
-
-      return {
-        shippingPrice: response.shipment.price,
-        estimatedDelivery: response.shipment.estimated
-      }
-    }catch(err) {
-      console.log(err)
-    }
-  }, */
   computed: {
     ...mapGetters(['getCart','getCartTotalPrice'])
   },
-/*   methods: {
-    async onChooseShipping(shipment) {
-      try {
-        let response = await  this.$axios.$post('/api/shipment', {
-          shipment: shipment
-        });
 
-        this.$store.commit('setShipping', {
-          price: response.shipment.price,
-          estimatedDelivery: response.shipment.estimated
-        })
-
-
-        this.shippingPrice = response.shipment.price
-        this.estimatedDelivery = response.shipment.estimated
-
-      }catch(err) {
-        console.log(err)
-      }
-    }
-  } */
 };
 </script>
 

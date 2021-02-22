@@ -3,8 +3,28 @@
     <h1 class="ma-3">Make a payment</h1>
     <div class="card" ref="card"></div>
     <p>The total price is: ${{getCartTotalPrice}}</p>
-    <v-btn @click="onPurchase">Purchase</v-btn>
+    <v-btn @click="onPurchase; snackbar = true">Purchase</v-btn>
+    <div class="text-center">
+        <v-snackbar
+        v-model="snackbar"
+        :multi-line="multiLine"
+        >
+        Purchase Completed
+
+        <template v-slot:action="{ attrs }">
+            <v-btn
+            color="red"
+            text
+            v-bind="attrs"
+            @click="onPurchase"
+            >
+            Close
+            </v-btn>
+        </template>
+        </v-snackbar>
+      </div>
   </div>
+  
 </template>
 
 <script>
@@ -15,7 +35,10 @@ export default {
     return {
       error: '',
       stripe: null,
-      card: null
+      card: null,
+      multiLine: true,
+      snackbar: false,   
+      show1: false,
     }
   },
   computed: {

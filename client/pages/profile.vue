@@ -35,11 +35,12 @@ export default {
     data() {
         return {
             multiLine: true,
-            snackbar: false,    
+            snackbar: false,   
+            show1: false, 
             name: '',
             email: '',
             password: '',
-            show1: false,
+            
         }
     },
     methods: {
