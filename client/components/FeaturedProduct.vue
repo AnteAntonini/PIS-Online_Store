@@ -1,11 +1,6 @@
 <template>
     <div align="center">
-        <h1>Books</h1>
-
-        <p>Browse for more Books
-        <a href="#">History or</a>
-        <a href="#">Fantasy books</a>
-        </p>
+        <h1 class="mb-4">Featured Book</h1>
         <v-row class="featured-product">
             <v-col col="3">
                 <img class="featured-image mt-3 pl-15" src="img/harry-potter.jpg"/>

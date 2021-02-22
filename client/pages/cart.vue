@@ -33,7 +33,9 @@
     <v-col md="4" class="mt-10 ml-8" style="border-left: 1px solid white">
       <div class="ml-5">
         <h3>Subtotal ({{getCartLength}} item): <span class="red--text">${{getCartTotalPrice}}</span></h3>
-        <v-btn class="mt-10" nuxt to="/payment" color="green">Proceed to checkout</v-btn>
+        <h3 class="mt-3">BUY:</h3>
+        <v-btn class="mt-4" nuxt to="/payment" color="green">With credit card</v-btn>
+        <v-btn class="mt-10" @click="onPurchase" color="green">Cash on delivery</v-btn>
       </div>
     </v-col>
   </div>
@@ -48,7 +50,7 @@ export default {
   },
   methods: {
     onChangeQuantity(event, product) {
-       let qty = parseInt(event.target.value);       //access value of the option, and convert string to a number
+      let qty = parseInt(event.target.value);       //access value of the option, and convert string to a number
       console.log(qty)
       this.$store.commit('changeQty', {product, qty});
     },
@@ -57,6 +59,24 @@ export default {
         return true
       } else {
         return false
+      }
+    },
+    async onPurchase() {
+      try {
+        let response = await this.$axios.$post('/api/payment', {
+          totalPrice: this.getCartTotalPrice,
+          cart: this.getCart,
+          estimatedDelivery: this.getEstimatedDelivery
+        })
+
+        if(response.success) {
+          //redirect
+          this.$store.commit('clearCart')  //after purchase clear cart
+          this.$router.push('/')
+        }
+
+      } catch (err) {
+        console.log(err)
       }
     }
   }

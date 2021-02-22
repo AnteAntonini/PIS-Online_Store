@@ -6,20 +6,20 @@
         <div v-for="order in orders" :key="order._id">
         <v-row class="mt-5 order-box">
             <v-col>
+                <span class="green--text">Delivered</span>
+            </v-col>
+            <v-col>
             ORDER PLACED<br>
             May 16,2016
             </v-col>
             <v-col>
                 TOTAL: <br>
-                ${{totalPrice}}
-                
+                ${{(order.products[0].price * order.products[0].quantity) + (order.products[1].price * order.products[0].quantity)}}
             </v-col>
             <v-col>
                 ORDER #: {{order._id}} <br>
-                <a href="#">Order Details</a>
             </v-col>
         </v-row>
-        
         <v-row class="order-box items">
             <v-col md="12"  v-for="product in order.products" :key="product._id">
                 <span>Title: {{product.productID.title}}</span> <br>
@@ -39,7 +39,7 @@ export default {
     try {
       let response = await $axios.$get('/api/orders')
 
-      console.log(response)
+      console.log(response.products)
 
       return {
         orders: response.products
@@ -51,13 +51,13 @@ export default {
   computed: {
     totalPrice() {
         let sum = 0;
-        this.orders.forEach(order => {
-            console.log(order.products.forEach(product => {
-                console.log(product.price)
-                return sum+= product.price;
-            }))
+        this.orders.forEach((order,index) => {
+            order.products.forEach(product => {
+                console.log(product.price* product.quantity)
+                console.log(index)
+            })
         })
-        return sum;
+        return [sum];
     }
   }
 }

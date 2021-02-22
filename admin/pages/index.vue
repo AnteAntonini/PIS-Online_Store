@@ -21,21 +21,9 @@
           <v-card-title :class="'text-subtitle-1'">{{product.title}}</v-card-title>
 
           <v-card-text>
-            <v-row align="center" class="mx-0">
-              <!-- Product Rating -->
-              <v-rating
-                :value="4.5"
-                color="amber"
-                dense
-                half-increments
-                readonly
-                size="14"
-              ></v-rating>
-
-              <div class="grey--text ml-4">4.5 (413)</div>
-            </v-row>
+            
             <!-- Product Price -->
-            <div class="my-4 subtitle-1">$ {{product.price}}</div>
+            <div class="my-4 subtitle-1 red--text">Price: ${{product.price}}</div>
           </v-card-text>
 
           <v-card-actions>
